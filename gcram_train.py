@@ -177,10 +177,3 @@ with tf.Session(config=config) as session:
         # for i in range(len(confusion_matrix)):
         #     print(confusion_matrix[i])
 
-        if accuracy_target_y > best_acc_per_run:
-            best_acc_per_run = accuracy_target_y
-
-        print(epoch, dataset, 'target_id: ', target_id,
-              'loss: ', loss_source_y, loss_target_y,
-              'acc: ', accuracy_source_y, accuracy_target_y,
-              best_acc_per_run)
