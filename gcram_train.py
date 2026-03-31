@@ -132,27 +132,6 @@ with tf.Session(config=config) as session:
             source_batch_x = source_X[batch_size * b: batch_size * (b + 1)]
             source_batch_y = source_y[batch_size * b: batch_size * (b + 1)]
 
-            # c = session.run(
-            #     ram.init_glimpse,
-            #     feed_dict={ram.img_ph: source_batch_x,
-            #                ram.lbl_ph: source_batch_y,
-            #                })
-            # print('c', c.shape)
-            #
-            # a = session.run(
-            #     ram.init_glimpse_cooperate,
-            #     feed_dict={ram.img_ph: source_batch_x,
-            #                ram.lbl_ph: source_batch_y,
-            #                })
-            # print(a.shape)
-
-            # simgs_ph, simgs_ph_re, sh_fc1, sconv_2d_1st, sconv_2d_2nd, sconv_2d_flat = session.run(
-            #     [ram.imgs_ph, ram.imgs_ph_re, ram.h_fc1, ram.conv_2d_1st, ram.conv_2d_2nd, ram.conv_2d_flat],
-            #     feed_dict={ram.img_ph: source_batch_x,
-            #                ram.lbl_ph: source_batch_y,
-            #                })
-            # print('\n\n\n cnn shape:\n', simgs_ph.shape, simgs_ph_re.shape, sh_fc1.shape, sconv_2d_1st.shape, sconv_2d_2nd.shape, sconv_2d_flat.shape)
-
             _, loss_source_y, accuracy_source_y = session.run(
                 [ram.train_op, ram.cross_entropy, ram.accuracy],
                 feed_dict={ram.img_ph: source_batch_x,
@@ -167,13 +146,4 @@ with tf.Session(config=config) as session:
                        ram.lbl_ph: target_y,
                        })
 
-        # confusion_matrix
-        # confusion_matrix = [[0] * nb_classes for _ in range(nb_classes)]
-        # for i in range(target_X.shape[0]):
-        #     confusion_matrix[int(target_y[i])][int(prediction[i])] += 1
-        # for i in range(nb_classes):
-        #     confusion_matrix[i] = [100 * j / sum(confusion_matrix[i]) for j in confusion_matrix[i]]
-        # print('confusion_matrix:')
-        # for i in range(len(confusion_matrix)):
-        #     print(confusion_matrix[i])
 
